@@ -1,0 +1,48 @@
+<script setup>
+import Character from '@/components/Character.vue'
+</script>
+
+<template>
+  <!-- 动态壁纸层 -->
+  <div class="wallpaper-container">
+    <!-- 渐变动画壁纸（底层备用） -->
+    <div class="wallpaper-gradient"></div>
+
+    <!-- 图片壁纸 -->
+    <img src="@/assets/bg.jpg" class="wallpaper-image" />
+
+    <!--
+      视频壁纸（可选，优先级最高）
+      取消注释下面这行，并在 src/assets/ 下放一个 wallpaper.mp4 即可启用
+    -->
+    <!--
+    <video class="wallpaper-video" autoplay muted loop playsinline>
+      <source src="@/assets/wallpaper.mp4" type="video/mp4" />
+    </video>
+    -->
+
+    <!-- 暗色遮罩 -->
+    <div class="wallpaper-overlay"></div>
+
+    <!-- 浮动粒子 -->
+    <div class="wallpaper-particles">
+      <span class="particle" v-for="i in 18" :key="i" :style="{
+        left: Math.random() * 100 + '%',
+        width: (Math.random() * 5 + 2) + 'px',
+        height: (Math.random() * 5 + 2) + 'px',
+        animationDuration: (Math.random() * 12 + 10) + 's',
+        animationDelay: (Math.random() * 10) + 's'
+      }"></span>
+    </div>
+  </div>
+
+  <!-- 路由视图 -->
+  <router-view></router-view>
+
+  <!-- 人物立绘组件（全局显示） -->
+  <Character />
+</template>
+
+<style scoped>
+/* App 级别不需要额外样式，全局样式在 main.css 中 */
+</style>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wmm.mapper.EmpExpMapper">
+    <insert id="insertBatch">
+        insert into emp_expr(emp_id, `begin`, `end`, company, job) values
+        <foreach collection="emprList" item="expr" separator=",">
+            (#{expr.empId}, #{expr.begin}, #{expr.end}, #{expr.company}, #{expr.job})
+        </foreach>
+    </insert>
+
+
+    <!--根据员工的ID批量删除工作经历信息-->
+    <delete id="delete">
+        delete from emp_expr where emp_id in
+        <foreach collection="ids" item="empId" open="(" close=")" separator=",">
+            #{empId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteById">
+        delete from emp_expr where emp_id = #{empId}
+    </delete>
+
+</mapper>
